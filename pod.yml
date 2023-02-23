@@ -14,17 +14,51 @@ spec:
         cpu: "500m"
     ports:
       - containerPort: 80
-  # - name: postgres
-  #   image: postgres:15.1
-  #   resources:
-  #     limits:
-  #       memory: "128Mi"
-  #       cpu: "500m"
-  #   ports:
-  #     - containerPort: 5432
-  #   env:
-  #     - name: POSTGRES_USER
-  #       value: pblgllgs
-  #     - name: POSTGRES_PASSWORD
-  #       value: example
-
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blue
+  labels:
+    name: blue
+    environment: test
+spec:
+  containers:
+  - name: blue
+    image: amigoscode/kubernetes:blue
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: green
+  labels:
+    name: green
+    environment: test
+spec:
+  containers:
+  - name: green
+    image: amigoscode/kubernetes:green
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: labels-and-selectors
+spec:
+  selector:
+    name: green
+    environment: test
+  ports:
+  - port: 80
+    targetPort: 80
