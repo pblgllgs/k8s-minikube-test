@@ -17,13 +17,15 @@ spec:
     metadata:
       labels:
         app: hello-world
-      # annotations:
-      #   kubernetes.io/change-cause: "cambio pblgllgs/hoobank:latest"
+        environment:  dev
+        tier: backend
+        department: engineering
+      annotations:
+        kubernetes.io/change-cause: "cambio a amigoscode/kubernetes:hello-world-v4"
     spec:
       containers:
       - name: hello-world
-        image: amigoscode/kubernetes:hello-world-v2
-        # image: pblgllgs/hoobank:latest
+        image: amigoscode/kubernetes:hello-world-v4
         resources:
           limits:
             memory: "128Mi"
