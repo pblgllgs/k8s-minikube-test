@@ -20,9 +20,12 @@ spec:
       - name: customer
         image: amigoscode/kubernetes:customer-v1
         resources:
-          limits:
+          requests:
             memory: "128Mi"
             cpu: "500m"
+          limits:
+            memory: "512Mi"
+            cpu: "1000m"
         env:
           - name: ORDER_SERVICE
             value: "order"
